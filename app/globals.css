@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* No global colors; components decide their own colors */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* UX niceties */
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: rgba(99, 102, 241, 0.25);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* subtle, formal motion */
+  @keyframes float-slow {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(0, -10px, 0);
+    }
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  .animate-float-slow {
+    animation: float-slow 10s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-60%);
+      opacity: 0;
+    }
+    20% {
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateX(60%);
+      opacity: 0;
+    }
+  }
+  .animate-shimmer {
+    animation: shimmer 5.5s ease-in-out infinite;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  /* minimal, classic motion (used across UI elements) */
+  @keyframes breathe {
+    0% {
+      transform: translate3d(0, 0, 0);
+      opacity: 0.9;
+    }
+    50% {
+      transform: translate3d(0, -3px, 0);
+      opacity: 1;
+    }
+    100% {
+      transform: translate3d(0, 0, 0);
+      opacity: 0.9;
+    }
+  }
+  .animate-breathe {
+    animation: breathe 6.5s ease-in-out infinite;
+  }
+
+  @keyframes logo-float {
+    0% {
+      transform: translate3d(0, 0, 0) rotateZ(0.01deg);
+    }
+    50% {
+      transform: translate3d(0, -10px, 0) rotateZ(0.01deg);
+    }
+    100% {
+      transform: translate3d(0, 0, 0) rotateZ(0.01deg);
+    }
+  }
+  .animate-logo-float {
+    animation: logo-float 7.5s ease-in-out infinite;
+  }
+}
