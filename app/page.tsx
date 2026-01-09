@@ -4,60 +4,141 @@ import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 export default function Home() {
-  const nav = [
-    { label: "Home", href: "#home" },
-    { label: "Projects", href: "#projects" },
-    { label: "Technology", href: "#technology" },
-    { label: "Certifications", href: "#certifications" },
-    { label: "Academic History", href: "#academic" },
-    { label: "Contact", href: "#contact" },
-  ] as const;
+  const nav = useMemo(
+    () =>
+      [
+        { label: "Home", href: "#home" },
+        { label: "Experience", href: "#experience" },
+        { label: "Projects", href: "#projects" },
+        { label: "Technology", href: "#technology" },
+        { label: "Academic History", href: "#academic" },
+        { label: "Contact", href: "#contact" },
+      ] as const,
+    []
+  );
+
+  const sectionIds = useMemo(
+    () => nav.map((n) => n.href.replace("#", "")),
+    [nav]
+  );
 
   const certificates = [
     {
-      title: "Web Development (HTML, CSS, JS)",
-      org: "Add your platform / institute",
-      year: "2024",
-      note: "Hands-on projects + fundamentals",
+      title: "Python for Data Science and AI",
+      org: "IBM",
+      year: 2025,
     },
     {
-      title: "Programming / DSA",
-      org: "Add your platform / institute",
-      year: "2024",
-      note: "Problem-solving practice",
+      title: "Python Data Analytics",
+      org: "Meta",
+      year: 2025,
     },
     {
-      title: "Core CS / CSE Coursework",
-      org: "University Coursework",
-      year: "2025",
-      note: "OS, DBMS, CN, OOP, etc.",
+      title: "Data Analysis with Pandas and Python",
+      org: "packt",
+      year: 2025,
+    },
+    {
+      title: "GenAI-Powered Data Analytics Job Simulation ",
+      org: "TATA",
+      year: 2025,
+    },
+    {
+      title: "Data Analytics Job Simulation",
+      org: "Deloitte",
+      year: 2025,
+    },
+    {
+      title: "Certified SAP Technology Consultant",
+      org: "SAP",
+      year: 2024,
+    },
+    {
+      title: "Python Programming",
+      org: "Udemy",
+      year: 2024,
     },
   ] as const;
 
+  const allCertificatesHref =
+    "https://drive.google.com/drive/folders/1SkYZVxpTE1JfguqfP6lyDN4Ah2yoo1lE"; // <-- replace with your real link
+
   const projects = [
     {
-      title: "Project One",
-      subtitle: "A modern web app",
+      title: "Movie Revenue Prediction",
+      subtitle: "Data Science & Machine Learning ",
       description:
-        "Briefly describe what it does, what you built, and the outcome (speed, UX, clarity, etc.).",
-      tags: ["HTML", "CSS", "JavaScript"],
+        "Developed machine learning models to predict movie box office revenue using budget, popularity, and runtime features.Performed data cleaning, feature engineering, EDA, and regression modeling to improve prediction accuracy.",
+      tags: ["Linear Regression", "Machine learning", "EDA"],
       links: { demo: "#", code: "#" },
+      image: { src: "/Movie.png", alt: "Movie Revenue Prediction" },
     },
     {
-      title: "Project Two",
-      subtitle: "UI-focused build",
+      title: "Wandora",
+      subtitle: "AI Powered Story Generator",
       description:
-        "Keep it concrete: features, audience, what problem it solves, and what you learned.",
-      tags: ["Frontend", "Responsive", "UI"],
-      links: { demo: "#", code: "#" },
+        "Developed a privacy-focused Streamlit application for AI-based story generation with secure, anonymous text-to-image visual creation.",
+      tags: ["Generative AI", "HuggingFace API", "StreamLit"],
+      links: {
+        demo: "https://storyai-1.onrender.com",
+        code: "https://github.com/SrutikNandaniya/StoryAI_",
+      },
+      image: { src: "/Wandora.png", alt: "Wandora" },
     },
     {
-      title: "Project Three",
-      subtitle: "Learning-to-production",
+      title: "Track-My-Gesture",
+      subtitle: "Real-Time Hand Gesture Recognition System",
       description:
-        "Mention the core feature, the tech used, and one detail you're proud of (performance, accessibility, structure).",
-      tags: ["APIs", "Auth", "Design"],
-      links: { demo: "#", code: "#" },
+        "Built a real-time hand gesture recognition system with live accuracy visualization and a responsive frontend interface.",
+      tags: ["Teachable Machine", "Hand Gesture Recognition", "Computer Vision"],
+      links: {
+        demo: "https://ai-gesture-recognization.onrender.com",
+        code: "https://github.com/SrutikNandaniya/AI_Gesture_Recognization",
+      },
+      image: { src: "/Gesture.png", alt: "Track-My-Gesture" },
+    },
+     {
+      title: "Hostel Bro",
+      subtitle: "A User-Friendly Computerized Solution for Efficient Hostel Administration.",
+      description:
+        " The Hostel Management System automates daily hostel operations by replacing manual record-keeping with a user-friendly, computerized system. It improves efficiency, accuracy, and ease of management for hostel administrators.",
+      tags: ["Hostel Management", "System Automation", "Student Accommodation"],
+      links: {
+        demo: "https://hostelbro.onrender.com",
+        code: "https://github.com/SrutikNandaniya/HostelBro",
+      },
+      image: { src: "/hostelbro.png", alt: "HostelBro" },
+    },
+     {
+      title: "JivaCare",
+      subtitle: "AI-Powered Digital Companion for Smart Healthcare Access",
+      description:
+        "JivaCare is an AI-enabled healthcare assistant that simplifies access to medical services, doctor consultations, and health guidance through an intelligent, user-friendly web platform.",
+      tags: ["Health Care", "Medical assistant", "Chatbot"],
+      links: {
+        demo: "https://jiva-care.onrender.com/",
+        code: "https://github.com/SrutikNandaniya/JivaCare",
+      },
+      image: { src: "/jivacare.png", alt: "JivaCare" },
+    },
+  ] as const;
+
+  const experiences = [
+    {
+      company: "Aspire Softserv - Ahmedabad ",
+      role: "Data Science Intern",
+      period: "Jan 2026 — Present",
+      description:
+        "Worked on various data science projects including house price prediction and customer segmentation. Implemented machine learning algorithms and performed comprehensive data analysis to derive actionable insights.",
+      skills: ["Python", "Machine Learning", "Data Analysis"],
+    },
+    {
+      company: "SAP - Remote",
+      role: "Data Engineer Intern",
+      period: "May 2025 — July 2025",
+      description:
+        "Designed and implemented data models and provisioned datasets for analytics use cases.",
+      skills: ["SAP", "SAP HANA Cloud", "Business Technology Platform (BTP)."],
     },
   ] as const;
 
@@ -65,43 +146,64 @@ export default function Home() {
     () =>
       [
         {
+          name: "Python",
+          icon: "https://www.svgrepo.com/show/374016/python.svg",
+          tone: "from-orange-500/18 to-amber-400/8",
+        },
+        {
+          name: "Artificial Intelligence",
+          icon: "https://www.svgrepo.com/show/388454/robot-one.svg",
+          tone: "from-orange-500/18 to-amber-400/8",
+        },
+        {
+          name: "Machine Learning",
+          icon: "https://cdn-icons-png.flaticon.com/128/2172/2172891.png",
+          tone: "from-orange-500/18 to-amber-400/8",
+        },
+        {
+          name: "SQL",
+          icon: "https://icon.icepanel.io/Technology/svg/Azure-SQL-Database.svg",
+          tone: "from-orange-500/18 to-amber-400/8",
+        },
+        {
+          name: "EDA",
+          icon: "https://www.svgrepo.com/show/530445/data-analysis.svg",
+          tone: "from-orange-500/18 to-amber-400/8",
+        },
+        {
+          name: "Pandas",
+          icon: "https://icon.icepanel.io/Technology/png-shadow-512/Pandas.png",
+          tone: "from-orange-500/18 to-amber-400/8",
+        },
+        {
+          name: "NumPy",
+          icon: "https://www.svgrepo.com/show/354127/numpy.svg",
+          tone: "from-orange-500/18 to-amber-400/8",
+        },
+         {
+          name: "HuggingFace",
+          icon: "https://huggingface.co/datasets/huggingface/brand-assets/resolve/main/hf-logo.svg",
+          tone: "from-orange-500/18 to-amber-400/8",
+        },
+        {
+          name: "Jupyter Notebook",
+          icon: "https://jupyter.org/assets/homepage/main-logo.svg",
+          tone: "from-orange-500/18 to-amber-400/8",
+        },
+
+        {
           name: "HTML",
-          icon: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/html5.svg",
+          icon: "https://www.svgrepo.com/show/452228/html-5.svg",
           tone: "from-orange-500/18 to-amber-400/8",
         },
         {
           name: "CSS",
-          icon: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/css3.svg",
+          icon: "https://www.svgrepo.com/show/452185/css-3.svg",
           tone: "from-sky-500/18 to-indigo-400/8",
         },
         {
-          name: "JavaScript",
-          icon: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/javascript.svg",
-          tone: "from-yellow-400/18 to-lime-400/8",
-        },
-        {
-          name: "TypeScript",
-          icon: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/typescript.svg",
-          tone: "from-blue-500/18 to-cyan-400/8",
-        },
-        {
-          name: "React",
-          icon: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/react.svg",
-          tone: "from-cyan-400/18 to-sky-400/8",
-        },
-        {
-          name: "Next.js",
-          icon: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/nextdotjs.svg",
-          tone: "from-zinc-300/10 to-zinc-300/5",
-        },
-        {
-          name: "Tailwind",
-          icon: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/tailwindcss.svg",
-          tone: "from-fuchsia-400/14 to-indigo-400/8",
-        },
-        {
           name: "Git/GitHub",
-          icon: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/github.svg",
+          icon: "https://cdn-icons-png.flaticon.com/128/536/536452.png",
           tone: "from-emerald-400/14 to-teal-400/8",
         },
       ] as const,
@@ -127,25 +229,22 @@ export default function Home() {
     () =>
       [
         {
-          period: "2021 — 2025",
-          title: "B.Tech in Computer Science & Engineering",
-          org: "Your College / University Name",
-          grade: "CGPA: 8.xx / 10",
-          points: ["Final year student", "Coursework: OS, DBMS, CN, OOP, etc."],
+          period: "2022 — 2026",
+          title: "B.E. in Computer Science & Engineering",
+          org: "R. N. G. Patel Institute of Technology,Bardoli, Gujarat, India",
+          grade: "CGPA: 8.67 / 10",
         },
         {
-          period: "2019 — 2021",
+          period: "2020 — 2022",
           title: "Higher Secondary (12th)",
-          org: "Your School Name",
-          grade: "Percentage: xx%",
-          points: ["Science stream", "Mathematics & fundamentals"],
+          org: "R.G.A.S. High School, Vapi, Gujarat, India",
+          grade: "Percentage: 63%",
         },
         {
-          period: "2018 — 2019",
+          period: "2019 — 2020",
           title: "Secondary (10th)",
-          org: "Your School Name",
-          grade: "Percentage: xx%",
-          points: ["Strong base", "Consistent academics"],
+          org: "Shree Swaminarayan Gurukul,Vapi,Gujarat,India  ",
+          grade: "Percentage: 72%",
         },
       ] as const,
     []
@@ -157,6 +256,21 @@ export default function Home() {
     techItems[0]
   );
   const [showTop, setShowTop] = useState(false);
+
+  const [activeSection, setActiveSection] =
+    useState<(typeof nav)[number]["href"]>("#home");
+
+  // NEW: desktop nav "active pill" indicator (beautiful sliding highlight)
+  const navWrapRef = useRef<HTMLDivElement | null>(null);
+  const navItemRefs = useRef<Array<HTMLAnchorElement | null>>([]);
+  const [navIndicator, setNavIndicator] = useState<{
+    left: number;
+    width: number;
+    opacity: number;
+  }>({ left: 0, width: 0, opacity: 0 });
+
+  type Theme = "light" | "dark";
+  const [theme, setTheme] = useState<Theme>("light"); // Default to light
 
   // Cursor follower (subtle + classic)
   const cursorOuterRef = useRef<HTMLDivElement | null>(null);
@@ -172,6 +286,35 @@ export default function Home() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem("theme");
+      const prefersDark =
+        window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false;
+
+      const initial: Theme =
+        saved === "light" || saved === "dark"
+          ? saved
+          : prefersDark
+            ? "dark"
+            : "light";
+
+      setTheme(initial);
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  useEffect(() => {
+    const isDark = theme === "dark";
+    document.documentElement.classList.toggle("dark", isDark);
+    try {
+      window.localStorage.setItem("theme", theme);
+    } catch {
+      // ignore
+    }
+  }, [theme]);
 
   useEffect(() => {
     const outer = cursorOuterRef.current;
@@ -217,588 +360,500 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    const elements = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean) as HTMLElement[];
+
+    if (elements.length === 0) return;
+
+    const obs = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => (b.intersectionRatio ?? 0) - (a.intersectionRatio ?? 0))[0];
+
+        if (!visible?.target?.id) return;
+        setActiveSection(`#${visible.target.id}`);
+      },
+      {
+        // activates a section as it crosses the upper-middle of the viewport
+        root: null,
+        threshold: [0.12, 0.2, 0.35],
+        rootMargin: "-18% 0px -64% 0px",
+      }
+    );
+
+    elements.forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, [sectionIds]);
+
+  // NEW: keep the active indicator aligned on section change + resize
+  useEffect(() => {
+    const update = () => {
+      const wrap = navWrapRef.current;
+      if (!wrap) return;
+
+      const idx = nav.findIndex((n) => n.href === activeSection);
+      const el = idx >= 0 ? navItemRefs.current[idx] : null;
+      if (!el) return;
+
+      const a = el.getBoundingClientRect();
+      const w = wrap.getBoundingClientRect();
+
+      setNavIndicator({
+        left: a.left - w.left,
+        width: a.width,
+        opacity: 1,
+      });
+    };
+
+    // run after layout settles
+    const raf = window.requestAnimationFrame(update);
+    window.addEventListener("resize", update, { passive: true });
+
+    return () => {
+      window.cancelAnimationFrame(raf);
+      window.removeEventListener("resize", update);
+    };
+  }, [activeSection, nav]);
+
   return (
-    <div className="min-h-screen bg-[#070A12] text-white">
+    <div className="min-h-screen bg-[var(--ds-bg)] text-[var(--ds-text)] selection:bg-indigo-100 dark:selection:bg-indigo-900/30 relative">
+      {/* Subtle Background Pattern */}
+      <div className="pointer-events-none fixed inset-0 z-0 ds-pattern opacity-[0.4] dark:opacity-[0.2]" />
+      
       {/* Cursor follower */}
       <div
         ref={cursorOuterRef}
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[60] hidden h-7 w-7 rounded-full border border-white/15 bg-white/[0.03] backdrop-blur md:block"
+        className="pointer-events-none fixed left-0 top-0 z-[60] hidden h-7 w-7 rounded-full border border-black/15 bg-black/[0.03] backdrop-blur dark:border-white/15 dark:bg-white/[0.03] md:block"
         style={{ transform: "translate3d(-100px, -100px, 0)" }}
       />
       <div
         ref={cursorInnerRef}
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[61] hidden h-2 w-2 rounded-full bg-white/70 md:block"
+        className="pointer-events-none fixed left-0 top-0 z-[61] hidden h-2 w-2 rounded-full bg-black/70 dark:bg-white/70 md:block"
         style={{ transform: "translate3d(-100px, -100px, 0)" }}
       />
 
-      {/* Background (kept subtle + professional) */}
+      {/* Background Accents - Studio Lights */}
       <div aria-hidden className="pointer-events-none fixed inset-0 overflow-hidden">
-        <div className="absolute -top-28 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-indigo-500/18 blur-[140px]" />
-        <div className="absolute -bottom-28 right-[-120px] h-[520px] w-[520px] rounded-full bg-fuchsia-500/14 blur-[160px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(900px_520px_at_18%_8%,rgba(255,255,255,0.05),transparent_60%),radial-gradient(700px_420px_at_82%_18%,rgba(255,255,255,0.04),transparent_60%)]" />
+        <div className="absolute -top-[10%] left-[10%] h-[60%] w-[60%] rounded-full bg-[#fdf0d5]/30 blur-[140px] dark:bg-[#d4a373]/10" />
+        <div className="absolute top-[20%] -right-[10%] h-[50%] w-[50%] rounded-full bg-[#faedcd]/20 blur-[120px] dark:bg-[#bc6c25]/5" />
+        <div className="absolute -bottom-[10%] left-[20%] h-[40%] w-[40%] rounded-full bg-[#e9edc9]/20 blur-[100px] dark:bg-[#606c38]/5" />
       </div>
 
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+      <div className="relative mx-auto max-w-6xl px-5 sm:px-8 z-10">
         {/* Top bar */}
         <header
           className={[
-            "sticky top-0 z-20 -mx-4 border-b bg-[#070A12]/75 px-4 py-3 backdrop-blur sm:-mx-6 sm:px-6 sm:py-4",
-            scrolled
-              ? "border-white/12 shadow-[0_10px_30px_-20px_rgba(0,0,0,0.9)]"
-              : "border-white/10",
+            "sticky top-0 z-50 w-full transition-all duration-500",
+            scrolled 
+              ? "py-4 bg-[var(--ds-surface)] backdrop-blur-xl border-b border-[var(--ds-border)] shadow-[var(--ds-shadow-tight)]" 
+              : "py-8 bg-transparent",
           ].join(" ")}
         >
-          <div className="flex items-center justify-between gap-4">
-            {/* Brand (more professional/creative) */}
+          <div className="flex items-center justify-between gap-8">
+            {/* Brand */}
             <a
               href="#home"
-              className="group inline-flex items-center gap-3 font-semibold tracking-tight"
+              className="group flex shrink-0 items-center gap-4 focus-visible:outline-none"
             >
-              <span className="relative inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl border border-white/12 bg-white/5">
-                <span
-                  aria-hidden
-                  className="absolute inset-0 opacity-0 transition-opacity group-hover:opacity-100"
-                  style={{
-                    background:
-                      "radial-gradient(24px 24px at 30% 20%, rgba(99,102,241,0.28), transparent 60%), radial-gradient(24px 24px at 70% 80%, rgba(217,70,239,0.22), transparent 60%)",
-                  }}
-                />
-                <span className="relative text-sm font-semibold text-white/90">
-                  SN
+              <div className="relative flex h-11 w-11 items-center justify-center">
+                {/* Rotating Outer Ring */}
+                <div className="absolute inset-0 rounded-full border-2 border-dashed border-[#d4a373]/30 animate-spin-slow" />
+                
+                {/* Inner Logo Circle */}
+                <div className="relative flex h-9 w-9 items-center justify-center rounded-full bg-[#d4a373] shadow-lg shadow-[#d4a373]/20 transition-transform duration-500 group-hover:scale-110">
+                  <div className="relative h-5 w-5">
+                    <Image
+                      src="https://cdn-icons-png.flaticon.com/128/15307/15307726.png"
+                      alt="S Logo"
+                      fill
+                      className="object-contain brightness-0 invert"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[13px] font-bold tracking-[0.25em] uppercase text-[var(--ds-text)] leading-none">
+                  Srutik
                 </span>
-              </span>
-
-              <span className="leading-tight">
-                <span className="block text-sm text-white/55">Srutik</span>
-                <span className="block text-base text-white">Nandaniya</span>
-              </span>
-
-              <span className="hidden text-xs text-white/40 sm:inline">
-                • Portfolio
-              </span>
+                <span className="mt-1 text-[10px] font-medium tracking-[0.15em] uppercase text-[#d4a373] leading-none">
+                  Nandaniya
+                </span>
+              </div>
             </a>
 
-            <nav className="hidden items-center gap-1 md:flex">
-              {nav.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="rounded-full px-3 py-2 text-sm text-white/70 transition hover:bg-white/5 hover:text-white"
-                >
-                  {item.label}
-                </a>
-              ))}
+            {/* Desktop nav */}
+            <nav className="hidden lg:block">
+              <ul className="flex items-center gap-5 xl:gap-10">
+                {nav.map((item) => {
+                  const isActive = activeSection === item.href;
+                  return (
+                    <li key={item.href} className="shrink-0">
+                      <a
+                        href={item.href}
+                        className={[
+                          "text-[10px] xl:text-[11px] font-bold uppercase tracking-[0.15em] xl:tracking-[0.25em] transition-all hover:text-[#d4a373]",
+                          isActive 
+                            ? "text-[#d4a373]" 
+                            : "text-[var(--ds-muted)]"
+                        ].join(" ")}
+                      >
+                        {item.label}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
             </nav>
 
-            <div className="flex items-center gap-2">
-              <a
-                href="#contact"
-                className="hidden rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#070A12] transition hover:bg-white/90 sm:inline-flex"
+            <div className="flex shrink-0 items-center gap-3">
+              {/* Theme Toggle */}
+              <button
+                type="button"
+                onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--ds-border)] bg-[var(--ds-surface-2)] text-[var(--ds-text)] transition-all hover:scale-110 active:scale-95"
+                aria-label="Toggle theme"
               >
-                Contact
-              </a>
+                {theme === "light" ? (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                ) : (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                )}
+              </button>
 
               <button
                 type="button"
-                aria-label="Open menu"
                 onClick={() => setMobileNavOpen((v) => !v)}
-                className="inline-flex items-center justify-center rounded-2xl border border-white/12 bg-white/5 px-3 py-2 text-sm font-semibold text-white/90 transition hover:bg-white/8 md:hidden"
+                className="lg:hidden flex h-10 w-10 items-center justify-center rounded-full border border-[var(--ds-border)] bg-[var(--ds-surface-2)] text-[var(--ds-text)]"
               >
-                <span className="sr-only">Menu</span>
-                <span className="grid gap-1">
-                  <span className="block h-0.5 w-5 bg-white/80" />
-                  <span className="block h-0.5 w-5 bg-white/80" />
-                  <span className="block h-0.5 w-5 bg-white/80" />
-                </span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
               </button>
             </div>
           </div>
 
+          {/* Mobile Nav - Improved Spacing */}
           {mobileNavOpen && (
-            <div className="mt-4 md:hidden">
-              <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-3 backdrop-blur">
-                <div className="grid gap-1">
-                  {nav.map((item) => (
-                    <a
-                      key={item.href}
-                      href={item.href}
-                      onClick={() => setMobileNavOpen(false)}
-                      className="rounded-2xl px-4 py-3 text-sm text-white/80 transition hover:bg-white/6 hover:text-white"
-                    >
-                      {item.label}
-                    </a>
-                  ))}
-                </div>
-                <div className="mt-2 border-t border-white/10 pt-2">
+            <div className="absolute top-full left-0 right-0 mt-4 mx-5 overflow-hidden rounded-2xl border border-[var(--ds-border)] bg-[var(--ds-surface)] backdrop-blur-2xl lg:hidden animate-fade-up shadow-2xl">
+              <nav className="flex flex-col p-3">
+                {nav.map((item) => (
                   <a
-                    href="#contact"
+                    key={item.href}
+                    href={item.href}
                     onClick={() => setMobileNavOpen(false)}
-                    className="inline-flex w-full items-center justify-center rounded-2xl bg-white px-4 py-3 text-sm font-semibold text-[#070A12] transition hover:bg-white/90"
+                    className="flex items-center px-5 py-4 text-sm font-bold uppercase tracking-widest text-zinc-500 hover:bg-zinc-50 hover:text-indigo-600 dark:text-zinc-400 dark:hover:bg-white/5 dark:hover:text-indigo-400 transition-all"
                   >
-                    Contact
+                    {item.label}
                   </a>
-                </div>
-              </div>
+                ))}
+              </nav>
             </div>
           )}
         </header>
 
-        {/* ✅ Recommended order starts here */}
-        <main id="home" className="py-10 sm:py-16">
-          {/* HOME */}
-          <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 shadow-[0_0_0_1px_rgba(255,255,255,0.04)] backdrop-blur sm:p-10">
-            <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
-              <div className="mx-auto w-full max-w-sm lg:order-2">
-                <div className="relative">
-                  <div className="absolute -inset-2 rounded-[2rem] bg-gradient-to-br from-indigo-500/25 via-fuchsia-500/14 to-white/10 blur-xl" />
-                  <div className="relative overflow-hidden rounded-[2rem] border border-white/15 bg-white/5 p-3">
-                    <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[1.6rem] border border-white/10 bg-black/20">
-                      <Image
-                        src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80"
-                        alt="Srutik Nandaniya"
-                        fill
-                        sizes="(max-width: 1024px) 90vw, 420px"
-                        className="object-cover"
-                        priority
-                      />
-                    </div>
+        <main id="home" className="py-12 sm:py-24">
+          {/* HERO SECTION - Redesigned */}
+          <section className="relative">
+            <div className="grid gap-16 lg:grid-cols-[1fr_400px] lg:items-center">
+              <div className="order-2 lg:order-1">
+                <div className="inline-flex items-center gap-2 rounded-full border border-[#d4a373]/20 bg-[#d4a373]/5 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[#d4a373]">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#d4a373] opacity-75"></span>
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#d4a373]"></span>
+                  </span>
+                  Data Science & AI/ML
+                </div>
 
-                    <div className="mt-3 rounded-2xl border border-white/10 bg-black/20 px-4 py-3">
-                      <div className="text-sm font-semibold">Srutik Nandaniya</div>
-                      <div className="mt-1 text-xs text-white/65">
-                        Computer Science & Engineering • 2025
-                      </div>
-                    </div>
-                  </div>
+                <h1 className="mt-8 text-5xl font-light leading-[1.1] tracking-tight text-[var(--ds-text)] sm:text-7xl lg:text-8xl">
+                  Designing <span className="italic font-serif text-[#d4a373]">Intelligence</span> with Data.
+                </h1>
+
+                <p className="mt-8 max-w-xl text-lg leading-relaxed text-[var(--ds-muted)] sm:text-xl font-light">
+                  My Name is Srutik Nandaniya i am a Final-year Computer Science student specializing in Python and Machine Learning. Crafting elegant solutions for complex data challenges.
+                </p>
+
+                <div className="mt-10 flex flex-wrap gap-4">
+                  <a
+                    href="#projects"
+                    className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-[#d4a373] px-10 py-4 text-[11px] font-bold uppercase tracking-[0.2em] text-white transition-all hover:bg-[#bc6c25] shadow-lg shadow-[#d4a373]/20"
+                  >
+                    View Projects
+                    <svg className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </a>
                 </div>
               </div>
 
-              <div className="lg:order-1">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
-                    Final-year CSE
-                  </span>
-                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
-                    Frontend • UI
-                  </span>
-                </div>
-
-                <h1 className="mt-4 text-balance text-3xl font-semibold leading-[1.1] tracking-tight sm:mt-5 sm:text-5xl">
-                  Srutik Nandaniya
-                </h1>
-
-                <p className="mt-3 max-w-2xl text-balance text-sm leading-relaxed text-white/70 sm:mt-4 sm:text-lg">
-                  I'm a final-year Computer Science & Engineering student. I enjoy
-                  building clean, responsive interfaces and I'm looking to apply my
-                  skills in a professional environment while growing in the tech
-                  industry.
-                </p>
-
-                <dl className="mt-5 grid gap-3 sm:mt-6 sm:grid-cols-3">
-                  <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                    <dt className="text-sm font-semibold">Role</dt>
-                    <dd className="mt-1 text-sm text-white/65">
-                      Frontend Developer (Student)
-                    </dd>
+              <div className="order-1 lg:order-2">
+                <div className="relative mx-auto aspect-[4/5] w-full max-w-[360px]">
+                  <div className="absolute -inset-6 rounded-[4rem] border border-[var(--ds-border)] bg-[var(--ds-surface-2)]/50" />
+                  <div className="relative h-full w-full overflow-hidden rounded-[3.5rem] border border-[var(--ds-border)] bg-[var(--ds-surface-2)] shadow-2xl">
+                    <Image
+                      src="/main.png"
+                      alt="Srutik Nandaniya"
+                      fill
+                      className="object-cover sepia-[0.2] transition-all duration-1000 hover:sepia-0 hover:scale-105"
+                      priority
+                    />
                   </div>
-                  <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                    <dt className="text-sm font-semibold">Focus</dt>
-                    <dd className="mt-1 text-sm text-white/65">
-                      UI, responsive design, JavaScript
-                    </dd>
-                  </div>
-                  <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                    <dt className="text-sm font-semibold">Looking for</dt>
-                    <dd className="mt-1 text-sm text-white/65">
-                      Internship / entry-level
-                    </dd>
-                  </div>
-                </dl>
-
-                <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:items-center">
-                  <a
-                    href="#projects"
-                    className="inline-flex items-center justify-center rounded-2xl bg-indigo-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-indigo-400"
-                  >
-                    View Projects
-                  </a>
-
-                  <a
-                    href="#contact"
-                    className="inline-flex items-center justify-center rounded-2xl border border-white/12 bg-white/5 px-5 py-3 text-sm font-semibold text-white/90 transition hover:bg-white/8"
-                  >
-                    Contact Me
-                  </a>
                 </div>
               </div>
             </div>
           </section>
 
-          {/* PROJECTS */}
-          <section id="projects" className="mt-12 sm:mt-20">
-            <div className="flex items-end justify-between gap-4">
+          {/* EXPERIENCE SECTION */}
+          <section id="experience" className="mt-32 sm:mt-48">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
               <div>
-                <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-                  Projects
+                <h2 className="text-3xl font-light tracking-tight text-[var(--ds-text)] sm:text-5xl">
+                  Professional <span className="italic font-serif text-[#d4a373]">Journey</span>
                 </h2>
-                <p className="mt-2 text-sm text-white/65">
-                  Selected work—replace titles, links, and descriptions with your real projects.
-                </p>
-              </div>
-              <div className="hidden text-sm text-white/60 sm:block">
-                Demos • code • outcomes
+                <p className="mt-4 text-[var(--ds-muted)] font-light">My career path and industry experience.</p>
               </div>
             </div>
 
-            <div className="mt-7 grid gap-4 lg:grid-cols-3">
+            <div className="mt-12 space-y-8">
+              {experiences.map((exp, idx) => (
+                <div
+                  key={idx}
+                  className="group relative overflow-hidden rounded-[3rem] border border-[var(--ds-border)] bg-[var(--ds-surface-2)]/40 p-8 transition-all duration-500 hover:bg-[var(--ds-surface-2)] hover:shadow-[var(--ds-shadow-soft)]"
+                >
+                  <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+                    <div className="flex-1">
+                      <div className="inline-flex items-center gap-2 rounded-full bg-[#d4a373]/10 px-4 py-1 text-[10px] font-bold uppercase tracking-widest text-[#d4a373]">
+                        {exp.period}
+                      </div>
+                      <h3 className="mt-4 text-2xl font-medium text-[var(--ds-text)]">{exp.role}</h3>
+                      <p className="mt-1 text-lg font-serif italic text-[#d4a373]">{exp.company}</p>
+                      <p className="mt-4 max-w-3xl text-[var(--ds-muted)] font-light leading-relaxed">
+                        {exp.description}
+                      </p>
+                      <div className="mt-6 flex flex-wrap gap-2">
+                        {exp.skills.map((skill) => (
+                          <span
+                            key={skill}
+                            className="rounded-full border border-[var(--ds-border)] bg-white/50 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--ds-muted)] dark:bg-white/5"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="hidden md:block">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--ds-border)] bg-white shadow-sm dark:bg-zinc-800">
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="text-[#d4a373]"
+                        >
+                          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* PROJECTS SECTION - Redesigned */}
+          <section id="projects" className="mt-32 sm:mt-48">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <h2 className="text-3xl font-light tracking-tight text-[var(--ds-text)] sm:text-5xl">Selected <span className="italic font-serif text-[#d4a373]">Works</span></h2>
+                <p className="mt-4 text-[var(--ds-muted)] font-light">A curated selection of research and development projects.</p>
+              </div>
+            </div>
+
+            <div className="mt-12 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
               {projects.map((p) => (
                 <article
                   key={p.title}
-                  className="group rounded-3xl border border-white/10 bg-white/[0.03] p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.04)] transition hover:-translate-y-0.5 hover:bg-white/[0.05]"
+                  className="group flex flex-col rounded-[3rem] border border-[var(--ds-border)] bg-[var(--ds-surface-2)]/40 p-5 transition-all duration-500 hover:bg-[var(--ds-surface-2)] hover:shadow-[var(--ds-shadow-soft)]"
                 >
-                  {/* "screenshot" graphic placeholder */}
-                  <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/25">
-                    <div className="h-28 w-full bg-[linear-gradient(110deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02),rgba(255,255,255,0.06))]" />
-                    <div
-                      aria-hidden
-                      className="pointer-events-none absolute inset-0 opacity-0 transition duration-500 group-hover:opacity-100"
-                      style={{
-                        background:
-                          "radial-gradient(500px 120px at 20% 0%, rgba(99,102,241,0.16), transparent 60%), radial-gradient(420px 120px at 80% 20%, rgba(217,70,239,0.12), transparent 60%)",
-                      }}
+                  <div className="relative aspect-[16/11] overflow-hidden rounded-[2.5rem] bg-[var(--ds-surface-2)]">
+                    <Image
+                      src={p.image.src}
+                      alt={p.image.alt}
+                      fill
+                      className="object-cover transition-transform duration-1000 group-hover:scale-110 sepia-[0.1]"
                     />
                   </div>
 
-                  <div className="mt-5 flex items-start justify-between gap-3">
-                    <div>
-                      <h3 className="text-lg font-semibold tracking-tight">
-                        {p.title}
-                      </h3>
-                      <p className="mt-1 text-sm text-white/60">{p.subtitle}</p>
+                  <div className="flex flex-1 flex-col p-5">
+                    <div className="flex flex-wrap gap-3">
+                      {p.tags.slice(0, 2).map((t) => (
+                        <span key={t} className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#d4a373]">
+                          {t}
+                        </span>
+                      ))}
                     </div>
-                  </div>
-
-                  <p className="mt-4 text-sm leading-relaxed text-white/70">
-                    {p.description}
-                  </p>
-
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {p.tags.map((t) => (
-                      <span
-                        key={t}
-                        className="rounded-full border border-white/10 bg-black/20 px-3 py-1 text-xs text-white/70"
+                    <h3 className="mt-4 text-xl font-medium leading-tight text-[var(--ds-text)]">{p.title}</h3>
+                    <p className="mt-4 line-clamp-3 text-sm leading-relaxed text-[var(--ds-muted)] font-light">
+                      {p.description}
+                    </p>
+                    
+                    <div className="mt-auto pt-8 flex gap-4">
+                      <a
+                        href={p.links.demo}
+                        className="flex-1 rounded-full bg-[#d4a373] py-3.5 text-center text-[10px] font-bold uppercase tracking-[0.2em] text-white transition-all hover:bg-[#bc6c25]"
                       >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="mt-6 flex items-center gap-2">
-                    <a
-                      href={p.links.demo}
-                      className="inline-flex flex-1 items-center justify-center rounded-2xl bg-white px-4 py-2.5 text-sm font-semibold text-[#070A12] transition hover:bg-white/90"
-                    >
-                      Live Demo
-                    </a>
-                    <a
-                      href={p.links.code}
-                      className="inline-flex flex-1 items-center justify-center rounded-2xl border border-white/12 bg-white/5 px-4 py-2.5 text-sm font-semibold text-white/85 transition hover:bg-white/8"
-                    >
-                      Code
-                    </a>
+                        Demo
+                      </a>
+                      <a
+                        href={p.links.code}
+                        className="flex-1 rounded-full border border-[var(--ds-border)] py-3.5 text-center text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--ds-text)] transition-all hover:bg-white dark:hover:bg-zinc-800"
+                      >
+                        Code
+                      </a>
+                    </div>
                   </div>
                 </article>
               ))}
             </div>
           </section>
 
-          {/* TECHNOLOGY / SKILLS */}
-          <section id="technology" className="mt-12 sm:mt-20">
-            <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-5 sm:p-10">
-              <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          {/* TECHNOLOGY SECTION - Redesigned */}
+          <section id="technology" className="mt-32 sm:mt-48">
+            <div className="rounded-[4rem] border border-[var(--ds-border)] bg-[var(--ds-surface-2)]/30 p-8 sm:p-20">
+              <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
                 <div>
-                  <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-                    Technology
-                  </h2>
-                  <p className="mt-2 text-sm text-white/65">
-                    Select a skill — the logo comes forward.
+                  <h2 className="text-3xl font-light tracking-tight text-[var(--ds-text)] sm:text-5xl">Technical <span className="italic font-serif text-[#d4a373]">Expertise</span></h2>
+                  <p className="mt-6 text-lg leading-relaxed text-[var(--ds-muted)] font-light">
+                    Specialized in building intelligent systems using industry-standard tools and methodologies.
                   </p>
-                </div>
-                <div className="text-sm text-white/60">Minimal motion, classic feel</div>
-              </div>
-
-              <div className="mt-7 grid gap-4 lg:mt-8 lg:grid-cols-[1fr_0.95fr]">
-                {/* Left: selector */}
-                <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-black/20 p-5">
-                  <div
-                    aria-hidden
-                    className="pointer-events-none absolute inset-0 bg-[radial-gradient(700px_320px_at_20%_10%,rgba(99,102,241,0.10),transparent_60%),radial-gradient(560px_280px_at_80%_20%,rgba(217,70,239,0.08),transparent_60%)]"
-                  />
-                  <div className="relative flex flex-wrap gap-2">
-                    {techItems.map((t) => {
-                      const isActive = activeTech.name === t.name;
-                      return (
-                        <button
-                          key={t.name}
-                          type="button"
-                          onClick={() => setActiveTech(t)}
-                          className={[
-                            "group relative overflow-hidden rounded-2xl border px-4 py-2 text-sm transition",
-                            isActive
-                              ? "border-white/20 bg-white/10 text-white"
-                              : "border-white/10 bg-white/5 text-white/75 hover:bg-white/8 hover:text-white",
-                          ].join(" ")}
-                        >
-                          <span
-                            aria-hidden
-                            className={[
-                              "pointer-events-none absolute inset-0 opacity-0 transition group-hover:opacity-100",
-                              "bg-gradient-to-br",
-                              t.tone,
-                            ].join(" ")}
-                          />
-                          <span className="relative">{t.name}</span>
-                        </button>
-                      );
-                    })}
+                  
+                  <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3">
+                    {techItems.map((t) => (
+                      <button
+                        key={t.name}
+                        onClick={() => setActiveTech(t)}
+                        className={[
+                          "flex items-center gap-3 rounded-2xl border p-4 transition-all",
+                          activeTech.name === t.name
+                            ? "border-[#d4a373] bg-white text-[#d4a373] shadow-sm"
+                            : "border-[var(--ds-border)] bg-transparent text-[var(--ds-muted)] hover:border-[#d4a373]/30"
+                        ].join(" ")}
+                      >
+                        <div className="h-4 w-4 relative opacity-70">
+                          <Image src={t.icon} alt={t.name} fill unoptimized className="object-contain" />
+                        </div>
+                        <span className="text-[10px] font-bold uppercase tracking-widest">{t.name}</span>
+                      </button>
+                    ))}
                   </div>
-
-                  <p className="relative mt-4 text-xs leading-relaxed text-white/55">
-                    Tip: keep your skills list honest. Replace these with your real strengths.
-                  </p>
                 </div>
 
-                {/* Right: "3D" logo stage (no text box) */}
-                <div className="perspective-1000 relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.02] p-4 sm:p-5">
-                  <div
-                    aria-hidden
-                    className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-indigo-500/10 blur-3xl animate-breathe"
-                  />
-                  <div
-                    aria-hidden
-                    className="pointer-events-none absolute -left-16 -bottom-16 h-60 w-60 rounded-full bg-fuchsia-500/8 blur-3xl animate-breathe"
-                    style={{ animationDelay: "0.8s" }}
-                  />
-
-                  <div className="preserve-3d relative h-[280px] w-full sm:h-[360px]">
+                <div className="perspective-1000 relative h-[400px] w-full">
+                  <div className="preserve-3d relative h-full w-full">
                     {techItems.map((t, i) => {
                       const isActive = activeTech.name === t.name;
                       const pos = techLayout[i % techLayout.length];
-
-                      const baseTransform = `translate(-50%, -50%) rotateX(${pos.rx}deg) rotateY(${pos.ry}deg) translateZ(10px) scale(${pos.s})`;
-                      const activeTransform =
-                        "translate(-50%, -50%) translateZ(190px) rotateX(0deg) rotateY(0deg) scale(1.12)";
-
                       return (
-                        <button
+                        <div
                           key={t.name}
-                          type="button"
-                          onClick={() => setActiveTech(t)}
-                          aria-label={`Select ${t.name}`}
                           className={[
-                            "absolute select-none rounded-[26px] border border-white/12 bg-black/25 p-4 sm:rounded-[28px] sm:p-5",
-                            "shadow-[0_22px_60px_-40px_rgba(0,0,0,0.95)] backdrop-blur",
-                            "transition-[transform,opacity,filter,top,left] duration-700 ease-[cubic-bezier(.2,.8,.2,1)]",
-                            "hover:border-white/18",
-                            isActive
-                              ? "z-20 opacity-100"
-                              : "z-10 opacity-85 hover:opacity-95",
-                            !isActive ? "animate-logo-float" : "",
+                            "absolute transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)]",
+                            isActive ? "z-30 scale-125 opacity-100" : "z-10 opacity-40 grayscale"
                           ].join(" ")}
                           style={{
                             top: isActive ? "50%" : pos.top,
                             left: isActive ? "50%" : pos.left,
-                            transform: isActive ? activeTransform : baseTransform,
-                            filter: isActive ? "saturate(1.1)" : "saturate(0.9)",
-                            animationDelay: `${i * 0.35}s`,
+                            transform: isActive 
+                              ? "translate(-50%, -50%) translateZ(100px)" 
+                              : `translate(-50%, -50%) rotateX(${pos.rx}deg) rotateY(${pos.ry}deg) scale(${pos.s})`,
                           }}
                         >
-                          <div
-                            aria-hidden
-                            className={[
-                              "pointer-events-none absolute inset-0 rounded-[26px] opacity-70 sm:rounded-[28px]",
-                              "bg-gradient-to-br",
-                              t.tone,
-                            ].join(" ")}
-                          />
-                          <div className="relative flex items-center justify-center">
-                            <div
-                              className={[
-                                "relative h-[88px] w-[88px] sm:h-[110px] sm:w-[110px]",
-                                "drop-shadow-[0_18px_22px_rgba(0,0,0,0.55)]",
-                                "transition-transform duration-700 ease-[cubic-bezier(.2,.8,.2,1)]",
-                                isActive ? "scale-105" : "scale-100",
-                              ].join(" ")}
-                            >
-                              <img
-                                src={t.icon}
-                                alt={t.name}
-                                loading="lazy"
-                                decoding="async"
-                                className="h-full w-full object-contain [filter:brightness(0)_invert(1)]"
-                              />
-                            </div>
+                          <div className="relative h-24 w-24 rounded-3xl border border-[var(--ds-border)] bg-[var(--ds-surface)] p-5 shadow-2xl backdrop-blur-xl">
+                            <Image src={t.icon} alt={t.name} fill unoptimized className="object-contain p-5" />
                           </div>
-                        </button>
+                        </div>
                       );
                     })}
-
-                    {/* subtle "floor" */}
-                    <div
-                      aria-hidden
-                      className="preserve-3d absolute inset-x-8 bottom-5 h-14 rounded-full bg-white/[0.03] blur-md sm:inset-x-10 sm:bottom-6 sm:h-16"
-                      style={{ transform: "rotateX(70deg) translateZ(-40px)" }}
-                    />
                   </div>
                 </div>
               </div>
             </div>
           </section>
 
-          {/* CERTIFICATIONS */}
-          <section id="certifications" className="mt-12 sm:mt-20">
-            <div className="flex items-end justify-between gap-4">
-              <div>
-                <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-                  Certifications
-                </h2>
-                <p className="mt-2 text-sm text-white/65">
-                  Add your real certificate titles and verification links if available.
-                </p>
+          {/* ACADEMIC & CERTS - Redesigned */}
+          <div className="mt-32 grid gap-16 sm:mt-48 lg:grid-cols-2">
+            <section id="academic">
+              <h2 className="text-3xl font-black tracking-tight sm:text-4xl">Education</h2>
+              <div className="mt-10 space-y-6">
+                {education.map((e) => (
+                  <div key={e.period} className="group relative rounded-[2rem] border border-[var(--ds-border)] bg-[var(--ds-surface-2)] p-8 transition-all hover:bg-[var(--ds-bg)]">
+                    <div className="text-[10px] font-black uppercase tracking-[0.2em] text-indigo-600 dark:text-indigo-400">{e.period}</div>
+                    <h3 className="mt-3 text-xl font-bold">{e.title}</h3>
+                    <p className="mt-2 text-sm text-[var(--ds-muted)]">{e.org}</p>
+                    <div className="mt-6 inline-flex rounded-xl bg-zinc-100 px-4 py-2 text-xs font-bold dark:bg-zinc-800">
+                      {e.grade}
+                    </div>
+                  </div>
+                ))}
               </div>
-            </div>
+            </section>
 
-            <div className="mt-7 grid gap-3">
-              {certificates.map((c, idx) => (
-                <div
-                  key={`${c.title}-${idx}`}
-                  className="rounded-3xl border border-white/10 bg-white/[0.03] p-5 transition hover:bg-white/[0.05]"
-                >
-                  <div className="flex flex-wrap items-start justify-between gap-3">
+            <section id="certifications">
+              <div className="flex items-center justify-between">
+                <h2 className="text-3xl font-black tracking-tight sm:text-4xl">Certifications</h2>
+                <a href={allCertificatesHref} target="_blank" className="text-xs font-bold uppercase tracking-widest text-indigo-600 hover:underline dark:text-indigo-400">View All</a>
+              </div>
+              <div className="mt-10 space-y-4">
+                {certificates.slice(0, 5).map((c, idx) => (
+                  <div key={idx} className="flex items-center justify-between rounded-2xl border border-[var(--ds-border)] bg-[var(--ds-surface-2)] p-5 transition-all hover:translate-x-2">
                     <div>
-                      <div className="text-base font-semibold">{c.title}</div>
-                      <div className="mt-1 text-sm text-white/65">{c.org}</div>
+                      <div className="text-sm font-bold">{c.title}</div>
+                      <div className="mt-1 text-[10px] font-bold uppercase tracking-wider text-[var(--ds-muted)]">{c.org}</div>
                     </div>
-                    <div className="rounded-2xl border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white/70">
-                      {c.year}
-                    </div>
+                    <div className="text-[10px] font-black text-zinc-400">{c.year}</div>
                   </div>
-                  <div className="mt-3 text-sm text-white/65">{c.note}</div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* ACADEMIC HISTORY */}
-          <section id="academic" className="mt-12 sm:mt-20">
-            <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-5 sm:p-10">
-              <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-                <div>
-                  <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-                    Academic History
-                  </h2>
-                  <p className="mt-2 text-sm text-white/65">
-                    Concise summary of education and grades.
-                  </p>
-                </div>
+                ))}
               </div>
+            </section>
+          </div>
 
-              <div className="relative mt-7 overflow-hidden rounded-3xl border border-white/10 bg-black/20 p-5 sm:mt-8 sm:p-6">
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute -right-14 -top-14 h-48 w-48 rounded-full bg-indigo-500/12 blur-3xl"
-                />
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute -left-16 -bottom-16 h-56 w-56 rounded-full bg-fuchsia-500/10 blur-3xl"
-                />
+          {/* CONTACT SECTION - Redesigned */}
+          <section id="contact" className="mt-32 pb-24 sm:mt-48">
+            <div className="rounded-[3rem] bg-zinc-900 p-10 text-white dark:bg-white dark:text-zinc-900 sm:p-20">
+              <div className="max-w-2xl">
+                <h2 className="text-4xl font-black tracking-tight sm:text-6xl">Let's build something extraordinary.</h2>
+                <p className="mt-8 text-lg text-zinc-400 dark:text-zinc-500">
+                  I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.
+                </p>
+                
+                <div className="mt-12 flex flex-wrap gap-6">
+                  <a href="mailto:srutikndn@gmail.com" className="text-2xl font-bold underline decoration-indigo-500 decoration-4 underline-offset-8 transition-all hover:text-indigo-400">
+                    srutikndn@gmail.com
+                  </a>
+                </div>
 
-                <div
-                  aria-hidden
-                  className="absolute left-4 top-6 bottom-6 w-px bg-white/10"
-                />
-
-                <ol className="relative pl-10">
-                  {education.map((e, idx) => (
-                    <li key={`${e.period}-${idx}`} className="relative pb-7 last:pb-0">
-                      <span className="absolute left-4 top-[6px] h-4 w-4 -translate-x-1/2 rounded-full border border-white/15 bg-[#070A12]">
-                        <span className="absolute inset-0.5 rounded-full bg-white/10" />
-                      </span>
-
-                      <div className="flex flex-wrap items-start justify-between gap-2">
-                        <div className="text-sm font-semibold text-white/90">
-                          {e.title}
-                        </div>
-                        <div className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
-                          {e.period}
-                        </div>
-                      </div>
-
-                      <div className="mt-1 text-sm text-white/65">{e.org}</div>
-
-                      <div className="mt-2 inline-flex rounded-2xl border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-white/75">
-                        {e.grade}
-                      </div>
-
-                      <ul className="mt-3 grid gap-1">
-                        {e.points.map((p) => (
-                          <li key={p} className="text-sm text-white/65">
-                            <span className="mr-2 text-white/35">•</span>
-                            {p}
-                          </li>
-                        ))}
-                      </ul>
-                    </li>
+                <div className="mt-16 flex gap-8">
+                  {['LinkedIn', 'GitHub'].map((platform) => (
+                    <a
+                      key={platform}
+                      href={platform === 'LinkedIn' ? "https://www.linkedin.com/in/srutiknandaniya/" : "https://github.com/SrutikNandaniya"}
+                      className="text-xs font-black uppercase tracking-[0.2em] text-zinc-500 transition-colors hover:text-white dark:hover:text-black"
+                    >
+                      {platform}
+                    </a>
                   ))}
-                </ol>
+                </div>
               </div>
             </div>
-          </section>
-
-          {/* CONTACT */}
-          <section id="contact" className="mt-12 pb-12 sm:mt-20 sm:pb-20">
-            <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-7 backdrop-blur sm:p-10">
-              <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-                Contact
-              </h2>
-              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white/70">
-                Add your real email and profiles so it's easy to reach you.
-              </p>
-
-              <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                <a
-                  href="mailto:youremail@example.com"
-                  className="rounded-3xl border border-white/10 bg-white/5 p-5 transition hover:bg-white/8"
-                >
-                  <div className="text-sm font-semibold">Email</div>
-                  <div className="mt-1 text-sm text-white/65">
-                    youremail@example.com
-                  </div>
-                </a>
-
-                <a
-                  href="#"
-                  className="rounded-3xl border border-white/10 bg-white/5 p-5 transition hover:bg-white/8"
-                >
-                  <div className="text-sm font-semibold">LinkedIn</div>
-                  <div className="mt-1 text-sm text-white/65">Add your link</div>
-                </a>
-
-                <a
-                  href="#"
-                  className="rounded-3xl border border-white/10 bg-white/5 p-5 transition hover:bg-white/8"
-                >
-                  <div className="text-sm font-semibold">GitHub</div>
-                  <div className="mt-1 text-sm text-white/65">Add your link</div>
-                </a>
-              </div>
-
-              <div className="mt-8 flex flex-col justify-between gap-3 border-t border-white/10 pt-6 text-sm text-white/55 sm:flex-row sm:items-center">
-                <div>© {new Date().getFullYear()} Srutik Nandaniya</div>
-                <div className="text-white/50">Classic • minimal • professional</div>
-              </div>
+            
+            <div className="mt-12 flex flex-col items-center justify-between gap-6 border-t border-[var(--ds-border)] pt-12 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--ds-muted)] sm:flex-row">
+              <div>© {new Date().getFullYear()} Srutik Nandaniya</div>
+              
             </div>
           </section>
         </main>
@@ -810,8 +865,9 @@ export default function Home() {
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className={[
             "fixed bottom-5 right-5 z-30 inline-flex h-11 w-11 items-center justify-center rounded-2xl",
-            "border border-white/12 bg-white/10 text-white shadow-[0_10px_30px_-18px_rgba(0,0,0,0.9)] backdrop-blur",
-            "transition hover:bg-white/14",
+            "border border-black/10 bg-white/70 text-zinc-900 shadow-[0_10px_30px_-18px_rgba(0,0,0,0.25)] backdrop-blur",
+            "transition hover:bg-white",
+            "dark:border-white/12 dark:bg-white/10 dark:text-white dark:shadow-[0_10px_30px_-18px_rgba(0,0,0,0.9)] dark:hover:bg-white/14",
             showTop ? "opacity-100" : "pointer-events-none opacity-0",
           ].join(" ")}
         >

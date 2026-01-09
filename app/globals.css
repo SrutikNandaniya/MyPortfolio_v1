@@ -2,18 +2,78 @@
 @tailwind components;
 @tailwind utilities;
 
-/* No global colors; components decide their own colors */
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
+/* Design tokens (palette + elevation).
+   Components still choose how to use these; tokens just keep the look cohesive. */
+@layer base {
+  :root {
+    /* Studio Soft Palette - Light */
+    --ds-bg: #fdfcfb; /* Warm paper white */
+    --ds-surface: rgba(255, 255, 255, 0.7);
+    --ds-surface-2: #f7f3f0; /* Soft sand */
+    --ds-border: rgba(180, 160, 140, 0.15);
 
-/* UX niceties */
-html {
-  scroll-behavior: smooth;
-}
+    --ds-text: #4a443f; /* Soft charcoal brown */
+    --ds-muted: #8c847d;
 
-::selection {
-  background: rgba(99, 102, 241, 0.25);
+    --ds-accent: 167 139 117; /* Muted bronze/tan */
+    --ds-accent-2: 212 163 115; /* Soft terracotta */
+
+    --ds-ring: rgba(167, 139, 117, 0.2);
+
+    --ds-shadow-soft: 0 30px 60px -12px rgba(167, 139, 117, 0.12);
+    --ds-shadow-tight: 0 8px 20px -6px rgba(167, 139, 117, 0.08);
+  }
+
+  .dark {
+    /* Studio Soft Palette - Dark (Elegant Night) */
+    --ds-bg: #1a1817; /* Deep espresso */
+    --ds-surface: rgba(35, 32, 30, 0.8);
+    --ds-surface-2: #262321;
+    --ds-border: rgba(212, 163, 115, 0.1);
+
+    --ds-text: #e6e1dd;
+    --ds-muted: #a69f98;
+
+    --ds-ring: rgba(212, 163, 115, 0.2);
+
+    --ds-shadow-soft: 0 30px 60px -12px rgba(0, 0, 0, 0.4);
+    --ds-shadow-tight: 0 8px 20px -6px rgba(0, 0, 0, 0.3);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    /* Use Geist variables loaded in layout.tsx */
+    font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
+      "Segoe UI", Roboto, Arial, "Noto Sans", "Apple Color Emoji",
+      "Segoe UI Emoji";
+    background: var(--ds-bg);
+    color: var(--ds-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: rgba(var(--ds-accent), 0.22);
+  }
+
+  /* Subtle, modern scrollbar (doesn't affect Firefox beyond defaults) */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.22);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  .dark ::-webkit-scrollbar-thumb {
+    background: rgba(165, 180, 252, 0.22);
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
 }
 
 @layer utilities {
@@ -21,7 +81,7 @@ html {
     text-wrap: balance;
   }
 
-  /* subtle, formal motion */
+  /* --- Enhanced motion (subtle + professional) --- */
   @keyframes float-slow {
     0% {
       transform: translate3d(0, 0, 0);
@@ -64,7 +124,6 @@ html {
     transform-style: preserve-3d;
   }
 
-  /* minimal, classic motion (used across UI elements) */
   @keyframes breathe {
     0% {
       transform: translate3d(0, 0, 0);
@@ -96,5 +155,119 @@ html {
   }
   .animate-logo-float {
     animation: logo-float 7.5s ease-in-out infinite;
+  }
+
+  /* New: gentle entrance */
+  @keyframes fade-up {
+    0% {
+      opacity: 0;
+      transform: translate3d(0, 12px, 0);
+    }
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  .animate-fade-up {
+    animation: fade-up 650ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  /* New: soft glow pulse (for accents only) */
+  @keyframes glow-pulse {
+    0% {
+      opacity: 0.45;
+      filter: blur(22px);
+    }
+    50% {
+      opacity: 0.7;
+      filter: blur(28px);
+    }
+    100% {
+      opacity: 0.45;
+      filter: blur(22px);
+    }
+  }
+  .animate-glow-pulse {
+    animation: glow-pulse 6.5s ease-in-out infinite;
+  }
+
+  /* New: subtle gradient pan (for small accent layers) */
+  @keyframes gradient-pan {
+    0% {
+      transform: translate3d(-6%, -3%, 0);
+    }
+    50% {
+      transform: translate3d(6%, 3%, 0);
+    }
+    100% {
+      transform: translate3d(-6%, -3%, 0);
+    }
+  }
+  .animate-gradient-pan {
+    animation: gradient-pan 10s ease-in-out infinite;
+  }
+
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .animate-spin-slow {
+    animation: spin-slow 12s linear infinite;
+  }
+
+  /* --- Reusable visual utilities (used by sections later) --- */
+  .ds-glass {
+    background: var(--ds-surface);
+    border: 1px solid var(--ds-border);
+    box-shadow: var(--ds-shadow-tight);
+    backdrop-filter: blur(14px);
+  }
+
+  .ds-pattern {
+    background-image: radial-gradient(var(--ds-border) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .ds-pattern-fine {
+    background-image: radial-gradient(var(--ds-border) 0.5px, transparent 0.5px);
+    background-size: 12px 12px;
+  }
+
+  .ds-card {
+    background: var(--ds-surface-2);
+    border: 1px solid var(--ds-border);
+    box-shadow: var(--ds-shadow-tight);
+    backdrop-filter: blur(12px);
+    transition:
+      transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      background-color 220ms ease,
+      border-color 220ms ease,
+      box-shadow 220ms ease;
+  }
+  .ds-card-hover {
+    transform: translate3d(0, -2px, 0);
+    box-shadow: var(--ds-shadow-soft);
+  }
+
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50;
+  }
+
+  /* Accessible motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-float-slow,
+    .animate-shimmer,
+    .animate-breathe,
+    .animate-logo-float,
+    .animate-fade-up,
+    .animate-glow-pulse,
+    .animate-gradient-pan,
+    .animate-spin-slow {
+      animation: none !important;
+    }
   }
 }

@@ -23,8 +23,24 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const themeInitScript = `
+(() => {
+  try {
+    const key = 'theme';
+    const saved = localStorage.getItem(key);
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    // Default to light if no saved preference
+    const isDark = saved ? saved === 'dark' : false; 
+    document.documentElement.classList.toggle('dark', isDark);
+  } catch {}
+})();
+`.trim();
+
   return (
     <html lang="en">
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
