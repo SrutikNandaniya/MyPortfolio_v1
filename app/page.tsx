@@ -591,7 +591,7 @@ export default function Home() {
                   <div className="absolute -inset-6 rounded-[4rem] border border-[var(--ds-border)] bg-[var(--ds-surface-2)]/50" />
                   <div className="relative h-full w-full overflow-hidden rounded-[3.5rem] border border-[var(--ds-border)] bg-[var(--ds-surface-2)] shadow-2xl">
                     <Image
-                      src="/main.png"
+                      src="/mainn.JPG"
                       alt="Srutik Nandaniya"
                       fill
                       className="object-cover sepia-[0.2] transition-all duration-1000 hover:sepia-0 hover:scale-105"
